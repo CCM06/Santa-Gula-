@@ -414,7 +414,7 @@
       }
 
       const mensagem = `Olá, meu nome é ${nome} e gostaria de fazer um pedido:\n${carrinho.map(item => `${item.nome} - R$ ${item.preco.toFixed(2)}`).join('\n')}\nTotal: R$ ${total.toFixed(2)}\nEndereço: ${endereco}`;
-      const urlWhatsApp = `https://wa.me/96991395312?text=${encodeURIComponent(mensagem)}`;
+      const urlWhatsApp = `https://wa.me/5596991395312?text=${encodeURIComponent(mensagem)}`;
       window.open(urlWhatsApp, '_blank');
     }
 
