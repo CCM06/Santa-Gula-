@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santa Gula</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1a1a1a;
+      color: #f5f5f5;
+      line-height: 1.6;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.claro {
+      background-color: #f5f5f5;
+      color: #1a1a1a;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff6f61;
+      margin-bottom: 20px;
+      animation: pulsar 2s infinite;
+      font-weight: 600;
+    }
+
+    @keyframes pulsar {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .categorias {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .categorias button {
+      background-color: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 15px 25px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1em;
+      font-weight: 600;
+    }
+
+    .categorias button:hover {
+      background-color: #e65a50;
+    }
+
+    .produtos {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+
+    .produto {
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      flex: 0 0 auto;
+    }
+
+    body.claro .produto {
+      background-color: #e0e0e0;
+      color: #1a1a1a;
+    }
+
+    .produto:hover {
+      transform: scale(1.05);
+    }
+
+    .produto img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .produto h3 {
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: #ff6f61;
+      font-weight: 600;
+    }
+
+    .produto p {
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    body.claro .produto p {
+      color: #666;
+    }
+
+    .produto button {
+      background-color: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+      font-weight: 600;
+    }
+
+    .produto button:hover {
+      background-color: #e65a50;
+    }
+
+    .carrinho {
+      margin-top: 30px;
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    body.claro .carrinho {
+      background-color: #e0e0e0;
+      color: #1a1a1a;
+    }
+
+    .carrinho h2 {
+      color: #ff6f61;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .carrinho ul {
+      list-style: none;
+    }
+
+    .carrinho li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #444;
+    }
+
+    body.claro .carrinho li {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .carrinho button {
+      background-color: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: 600;
+    }
+
+    .carrinho button:hover {
+      background-color: #e65a50;
+    }
+
+    .finalizar {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .finalizar input {
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #333;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body.claro .finalizar input {
+      background-color: #fff;
+      color: #1a1a1a;
+      border: 1px solid #ccc;
+    }
+
+    .finalizar button {
+      background-color: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: 600;
+    }
+
+    .finalizar button:hover {
+      background-color: #e65a50;
+    }
+
+    .sobre {
+      margin-top: 40px;
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    body.claro .sobre {
+      background-color: #e0e0e0;
+      color: #1a1a1a;
+    }
+
+    .sobre h2 {
+      color: #ff6f61;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .botao-tema {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(255, 111, 97, 0.8);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .botao-tema:hover {
+      background-color: rgba(230, 90, 80, 0.8);
+    }
+
+    .botao-topo {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background-color: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: none;
+    }
+
+    .botao-topo:hover {
+      background-color: #e65a50;
+    }
+  </style>
+</head>
+<body>
+  <h1>Santa Gula</h1>
+
+  <div class="categorias">
+    <button onclick="mostrarSalgados()">Salgados</button>
+    <button onclick="mostrarBebidas()">Bebidas</button>
+    <button onclick="mostrarCombos()">Combos</button>
+  </div>
+
+  <!-- Seção de Salgados -->
+  <div id="salgados" class="produtos">
+    <div class="produto" data-nome="Coxinha de Frango" data-preco="5.00">
+      <img src="coxinha.jpg" alt="Coxinha de Frango">
+      <h3>Coxinha de Frango</h3>
+      <p>R$ 5,00</p>
+      <button onclick="adicionarAoCarrinho('Coxinha de Frango', 5.00)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Pastelzinho de Carne" data-preco="4.50">
+      <img src="pastel.jpg" alt="Pastelzinho de Carne">
+      <h3>Pastelzinho de Carne</h3>
+      <p>R$ 4,50</p>
+      <button onclick="adicionarAoCarrinho('Pastelzinho de Carne', 4.50)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Canudinho de Frango" data-preco="3.50">
+      <img src="canudinho de frango.jpg" alt="Canudinho de Frango">
+      <h3>Canudinho de Frango</h3>
+      <p>R$ 3,50</p>
+      <button onclick="adicionarAoCarrinho('Canudinho de Frango', 3.50)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Almofada de Carne" data-preco="4.00">
+      <img src="https://via.placeholder.com/150" alt="Almofada de Carne">
+      <h3>Almofada de Carne</h3>
+      <p>R$ 4,00</p>
+      <button onclick="adicionarAoCarrinho('Almofada de Carne', 4.00)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Bolinha de Queijo e Presunto" data-preco="3.00">
+      <img src="bolinha de queijo.jpg" alt="Bolinha de Queijo e Presunto">
+      <h3>Bolinha de Queijo e Presunto</h3>
+      <p>R$ 3,00</p>
+      <button onclick="adicionarAoCarrinho('Bolinha de Queijo e Presunto', 3.00)">Adicionar</button>
+    </div>
+  </div>
+
+  <!-- Seção de Bebidas -->
+  <div id="bebidas" class="produtos" style="display: none;">
+    <div class="produto" data-nome="Coca-Cola" data-preco="6.00">
+      <img src="coca cola 350.ml jpg.jpg" alt="Coca-Cola">
+      <h3>Coca-Cola 350ml</h3>
+      <p>R$ 6,00</p>
+      <button onclick="adicionarAoCarrinho('Coca-Cola', 6.00)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Fanta Laranja" data-preco="5.50">
+      <img src="fanta laranja.jpg" alt="Fanta Laranja">
+      <h3>Fanta Laranja 350ml</h3>
+      <p>R$ 5,50</p>
+      <button onclick="adicionarAoCarrinho('Fanta Laranja', 5.50)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Sukita" data-preco="5.00">
+      <img src="https://via.placeholder.com/150" alt="Sukita">
+      <h3>Sukita</h3>
+      <p>R$ 5,00</p>
+      <button onclick="adicionarAoCarrinho('Sukita', 5.00)">Adicionar</button>
+    </div>
+  </div>
+
+  <!-- Seção de Combos -->
+  <div id="combos" class="produtos" style="display: none;">
+    <div class="produto" data-nome="Combo 1" data-preco="15.00">
+      <img src="https://via.placeholder.com/150" alt="Combo 1">
+      <h3>Combo 1 faz o L</h3>
+      <p>2 Coxinhas + 1 café</p>
+      <p>R$ 80,00</p>
+      <button onclick="adicionarAoCarrinho('Combo 1', 15.00)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Combo 2" data-preco="20.00">
+      <img src="https://via.placeholder.com/150" alt="Combo 2">
+      <h3>Combo 2 faz o L</h3>
+      <p>1 beijo + 1 Suco Natural</p>
+      <p>R$ 50,00</p>
+      <button onclick="adicionarAoCarrinho('Combo 2', 20.00)">Adicionar</button>
+    </div>
+    <div class="produto" data-nome="Combo 3" data-preco="25.00">
+      <img src="https://via.placeholder.com/150" alt="Combo 3">
+      <h3>Combo 3 faz o L</h3>
+      <p>5 pé de muleke + 1 Água Mineral</p>
+      <p>R$ 90,00</p>
+      <button onclick="adicionarAoCarrinho('Combo 3', 25.00)">Adicionar</button>
+    </div>
+  </div>
+
+  <div class="carrinho">
+    <h2>Carrinho de Compras</h2>
+    <ul id="lista-carrinho"></ul>
+    <p>Total: R$ <span id="total">0.00</span></p>
+    <div class="finalizar">
+      <input type="text" id="nome" placeholder="Digite seu nome" required>
+      <input type="text" id="endereco" placeholder="Digite seu endereço" required>
+      <button onclick="finalizarPedido()">Finalizar Pedido via WhatsApp</button>
+    </div>
+  </div>
+
+  <div class="sobre">
+    <h2>Sobre a Santa Gula</h2>
+    <p>Bem-vindo à Santa Gula! Somos especializados em salgados, bebidas refrescantes e combos incríveis. Nossa missão é levar sabor e alegria para o seu dia a dia. Experimente nosso delicioso dono e colaborador da empresa rs ele se chama Bruno pinto de mel rs </div>
+
+  <button class="botao-tema" onclick="alternarTema()">🌓</button>
+  <button class="botao-topo" onclick="rolarParaTopo()">↑</button>
+
+  <script>
+    let carrinho = [];
+    let total = 0;
+
+    function adicionarAoCarrinho(nome, preco) {
+      carrinho.push({ nome, preco });
+      total += preco;
+      atualizarCarrinho();
+    }
+
+    function removerDoCarrinho(index) {
+      total -= carrinho[index].preco;
+      carrinho.splice(index, 1);
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      const listaCarrinho = document.getElementById('lista-carrinho');
+      const totalElement = document.getElementById('total');
+      listaCarrinho.innerHTML = '';
+      carrinho.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)} <button onclick="removerDoCarrinho(${index})">Remover</button>`;
+        listaCarrinho.appendChild(li);
+      });
+      totalElement.textContent = total.toFixed(2);
+    }
+
+    function finalizarPedido() {
+      const nome = document.getElementById('nome').value;
+      const endereco = document.getElementById('endereco').value;
+
+      if (!nome || !endereco) {
+        alert('Por favor, insira seu nome e endereço.');
+        return;
+      }
+
+      const mensagem = `Olá, meu nome é ${nome} e gostaria de fazer um pedido:\n${carrinho.map(item => `${item.nome} - R$ ${item.preco.toFixed(2)}`).join('\n')}\nTotal: R$ ${total.toFixed(2)}\nEndereço: ${endereco}`;
+      const urlWhatsApp = `https://wa.me/96991395312?text=${encodeURIComponent(mensagem)}`;
+      window.open(urlWhatsApp, '_blank');
+    }
+
+    function alternarTema() {
+      document.body.classList.toggle('claro');
+    }
+
+    function rolarParaTopo() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function mostrarSalgados() {
+      document.getElementById('salgados').style.display = 'flex';
+      document.getElementById('bebidas').style.display = 'none';
+      document.getElementById('combos').style.display = 'none';
+    }
+
+    function mostrarBebidas() {
+      document.getElementById('salgados').style.display = 'none';
+      document.getElementById('bebidas').style.display = 'flex';
+      document.getElementById('combos').style.display = 'none';
+    }
+
+    function mostrarCombos() {
+      document.getElementById('salgados').style.display = 'none';
+      document.getElementById('bebidas').style.display = 'none';
+      document.getElementById('combos').style.display = 'flex';
+    }
+
+    window.onscroll = function() {
+      const botaoTopo = document.querySelector('.botao-topo');
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        botaoTopo.style.display = 'block';
+      } else {
+        botaoTopo.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
